@@ -1,0 +1,8 @@
+{
+  "name": "20260210 Growth Artist Portfolio",
+  "description": "A high-conversion multi-disciplinary portfolio showcasing growth hacking, data-driven systems, and creative photography with a 24/7 Gemini-powered digital consultant.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
