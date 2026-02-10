@@ -4,28 +4,22 @@ import { Message } from "../types";
 import { SYSTEM_PROMPT } from "../constants";
 
 /**
- * Gets a response from Gemini using the chat interface.
- * History is passed to maintain context.
+ * Always initialize GoogleGenAI with a named parameter for the API key.
+ * The API key is obtained exclusively from process.env.API_KEY.
  */
 export const getGeminiResponse = async (history: Message[], userInput: string) => {
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
-  // Construct the chat session with history
   const chat = ai.chats.create({
     model: 'gemini-3-flash-preview',
-    history: history.map(msg => ({
-      role: msg.role,
-      parts: [{ text: msg.text }]
-    })),
     config: {
       systemInstruction: SYSTEM_PROMPT,
       temperature: 0.7,
     }
   });
 
-  // sendMessage returns a GenerateContentResponse
-  const response = await chat.sendMessage({ message: userInput });
   // Use the .text property of GenerateContentResponse to get the output string.
+  const response = await chat.sendMessage({ message: userInput });
   return response.text || "I'm sorry, I couldn't process that request.";
 };
 
@@ -39,7 +33,7 @@ export const scoreLead = async (formData: any) => {
   Lead Data: ${JSON.stringify(formData)}
   `;
 
-  // Use ai.models.generateContent for single generation tasks with JSON schema.
+  // Always use ai.models.generateContent to query GenAI with both model name and prompt.
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
     contents: prompt,
@@ -61,10 +55,5 @@ export const scoreLead = async (formData: any) => {
   const text = response.text;
   if (!text) return { score: 0, category: 'N/A', summary: 'No response from AI' };
   
-  try {
-    return JSON.parse(text);
-  } catch (e) {
-    console.error("Failed to parse AI response:", e);
-    return { score: 0, category: 'Error', summary: 'Failed to process lead evaluation.' };
-  }
+  return JSON.parse(text);
 };

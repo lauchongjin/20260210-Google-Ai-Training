@@ -1,12 +1,6 @@
 
 export type SiteMode = 'technical' | 'creative';
 
-export interface Message {
-  role: 'user' | 'model';
-  text: string;
-  timestamp: Date;
-}
-
 export interface CaseStudy {
   id: string;
   title: string;
@@ -16,6 +10,12 @@ export interface CaseStudy {
   metrics?: { label: string; value: string }[];
   codeSnippet?: string;
   gallery?: string[];
+}
+
+export interface Message {
+  role: 'user' | 'model';
+  text: string;
+  timestamp: Date;
 }
 
 export interface ServicePackage {
