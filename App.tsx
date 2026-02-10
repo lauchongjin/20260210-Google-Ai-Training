@@ -11,16 +11,13 @@ import {
   Camera, 
   TrendingUp,
   ArrowRight, 
-  Github, 
-  Linkedin, 
-  Twitter, 
   ToggleLeft, 
   ToggleRight,
   ChevronDown
 } from 'lucide-react';
 import Portfolio from './components/Portfolio';
-import AIConsultant from './components/AIConsultant';
 import Contact from './components/Contact';
+import AIConsultant from './components/AIConsultant';
 
 const App: React.FC = () => {
   const [mode, setMode] = useState<SiteMode>('technical');
@@ -91,7 +88,6 @@ const App: React.FC = () => {
 
       {/* Hero Section */}
       <header className="relative pt-48 pb-32 px-6 overflow-hidden">
-        {/* Background Grid for Tech Mode */}
         {mode === 'technical' && (
           <div className="absolute inset-0 z-0 opacity-20" style={{
             backgroundImage: `linear-gradient(#222 1px, transparent 1px), linear-gradient(90deg, #222 1px, transparent 1px)`,
@@ -140,7 +136,7 @@ const App: React.FC = () => {
               mode === 'technical' ? 'border-4 border-zinc-800' : 'border-8 border-white'
             }`}>
               <img 
-                src={mode === 'technical' ? 'https://picsum.photos/seed/tech/800/800' : 'https://picsum.photos/seed/creative/800/800'} 
+                src={mode === 'technical' ? 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800' : 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800'} 
                 alt="Portrait" 
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               />
@@ -187,10 +183,8 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Portfolio */}
         <Portfolio mode={mode} />
 
-        {/* Services */}
         <section id="services" className={`py-24 px-6 ${mode === 'technical' ? 'bg-zinc-950' : 'bg-gray-50'}`}>
           <div className="max-w-7xl mx-auto">
             <h2 className={`text-4xl font-bold mb-16 text-center ${mode === 'creative' ? 'font-serif' : 'font-mono'}`}>Services & Systems</h2>
@@ -213,7 +207,7 @@ const App: React.FC = () => {
                     ))}
                   </ul>
                   <button className={`w-full py-3 rounded-xl font-bold transition-all ${
-                    mode === 'technical' ? 'bg-zinc-800 hover:bg-zinc-700' : 'bg-gray-900 hover:bg-black text-white'
+                    mode === 'technical' ? 'bg-zinc-800 hover:bg-zinc-700 text-white' : 'bg-gray-900 hover:bg-black text-white'
                   }`}>
                     Book Consulting
                   </button>
@@ -223,11 +217,9 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Contact */}
         <Contact mode={mode} />
       </main>
 
-      {/* Footer */}
       <footer className={`py-12 px-6 border-t ${mode === 'technical' ? 'bg-black border-zinc-900' : 'bg-white border-gray-100'}`}>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-3">
@@ -242,15 +234,13 @@ const App: React.FC = () => {
           </div>
 
           <div className={`text-xs ${mode === 'technical' ? 'text-zinc-700' : 'text-gray-300'}`}>
-            © {new Date().getFullYear()} Alex Rivera. Handcrafted with React & Gemini.
+            © {new Date().getFullYear()} Alex Rivera. Handcrafted for Performance.
           </div>
         </div>
       </footer>
 
-      {/* AI Bot */}
       <AIConsultant mode={mode} />
 
-      {/* Mobile Menu Overlay */}
       {isMenuOpen && (
         <div className={`fixed inset-0 z-[60] flex flex-col p-12 transition-all ${mode === 'technical' ? 'bg-black' : 'bg-white'}`}>
           <div className="flex justify-end mb-12">

@@ -1,8 +1,7 @@
 
 import React, { useState } from 'react';
 import { SiteMode } from '../types';
-import { Mail, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
-import { scoreLead } from '../services/gemini';
+import { Mail, Send, CheckCircle2, Loader2 } from 'lucide-react';
 
 interface Props {
   mode: SiteMode;
@@ -11,21 +10,15 @@ interface Props {
 const Contact: React.FC<Props> = ({ mode }) => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', budget: '1000-5000' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [leadAnalysis, setLeadAnalysis] = useState<any>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
-    try {
-      // Analyze lead via Gemini
-      const analysis = await scoreLead(formData);
-      setLeadAnalysis(analysis);
+    
+    // Simulate a successful form submission
+    setTimeout(() => {
       setStatus('success');
-      // In real app, push to Notion/HubSpot here
-    } catch (err) {
-      console.error(err);
-      setStatus('error');
-    }
+    }, 1200);
   };
 
   return (
@@ -33,10 +26,10 @@ const Contact: React.FC<Props> = ({ mode }) => {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h2 className={`text-5xl font-bold mb-6 ${mode === 'creative' ? 'font-serif' : 'font-mono uppercase'}`}>
-            Let's Build Systems
+            Let's Build Together
           </h2>
           <p className={`text-xl ${mode === 'technical' ? 'text-zinc-500' : 'text-gray-600'}`}>
-            Ready to scale? My AI will pre-analyze your project scope to ensure we're a perfect fit.
+            Ready to scale your systems or capture your brand? Reach out for a custom consultation.
           </p>
         </div>
 
@@ -50,23 +43,16 @@ const Contact: React.FC<Props> = ({ mode }) => {
               <div className="flex justify-center mb-6">
                 <CheckCircle2 className={`w-16 h-16 ${mode === 'technical' ? 'text-blue-500' : 'text-green-500'}`} />
               </div>
-              <h3 className={`text-3xl font-bold mb-4 ${mode === 'creative' ? 'text-gray-900' : 'text-white font-mono'}`}>Message Encrypted & Received</h3>
+              <h3 className={`text-3xl font-bold mb-4 ${mode === 'creative' ? 'text-gray-900' : 'text-white font-mono'}`}>Message Received</h3>
               <p className={`mb-8 ${mode === 'technical' ? 'text-zinc-400' : 'text-gray-600'}`}>
-                Alex has been notified. Our automated workflow has categorized your project.
+                Thank you for reaching out. Alex will get back to you within 24-48 hours.
               </p>
-              {leadAnalysis && (
-                <div className={`max-w-md mx-auto p-6 rounded-2xl border ${
-                  mode === 'technical' ? 'bg-zinc-800 border-zinc-700' : 'bg-indigo-50 border-indigo-100'
-                }`}>
-                  <div className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Automated Analysis</div>
-                  <div className={`text-2xl font-bold mb-2 ${mode === 'technical' ? 'text-blue-400' : 'text-indigo-600'}`}>
-                    Project Score: {leadAnalysis.score}/10
-                  </div>
-                  <p className={`text-sm italic ${mode === 'technical' ? 'text-zinc-400' : 'text-gray-600'}`}>
-                    "{leadAnalysis.summary}"
-                  </p>
-                </div>
-              )}
+              <button 
+                onClick={() => setStatus('idle')}
+                className={`px-8 py-3 rounded-xl font-bold ${mode === 'technical' ? 'bg-zinc-800 text-white' : 'bg-gray-100 text-gray-900'}`}
+              >
+                Send Another
+              </button>
             </div>
           ) : (
             <>
@@ -118,18 +104,18 @@ const Contact: React.FC<Props> = ({ mode }) => {
                     }`}
                   >
                     {status === 'loading' ? <Loader2 className="animate-spin" /> : <Send className="w-5 h-5" />}
-                    Deploy Project Inquiry
+                    Send Message
                   </button>
                 </form>
               </div>
 
               <div className="flex flex-col justify-between">
                 <div>
-                  <h4 className={`text-xl font-bold mb-6 ${mode === 'creative' ? 'font-serif' : 'font-mono'}`}>Brief</h4>
+                  <h4 className={`text-xl font-bold mb-6 ${mode === 'creative' ? 'font-serif' : 'font-mono'}`}>Message</h4>
                   <textarea 
-                    rows={6}
+                    rows={8}
                     required
-                    placeholder="Tell me about your bottlenecks..."
+                    placeholder="Briefly describe your goals or bottlenecks..."
                     value={formData.message}
                     onChange={e => setFormData({...formData, message: e.target.value})}
                     className={`w-full px-4 py-3 rounded-xl outline-none border transition-all resize-none ${
@@ -142,9 +128,9 @@ const Contact: React.FC<Props> = ({ mode }) => {
                   mode === 'technical' ? 'bg-blue-500/10 border-blue-500/20 text-blue-400' : 'bg-indigo-50 border-indigo-100 text-indigo-600'
                 }`}>
                   <div className="flex gap-4 items-center">
-                    <AlertCircle className="w-6 h-6 shrink-0" />
+                    <Mail className="w-6 h-6 shrink-0" />
                     <p className="text-xs leading-relaxed">
-                      <strong>AI Lead Score Activated:</strong> Your inquiry is processed in real-time to determine priority.
+                      This form is connected directly to Alex's workspace. Your inquiry is safe and private.
                     </p>
                   </div>
                 </div>
