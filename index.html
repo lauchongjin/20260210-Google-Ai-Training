@@ -5,20 +5,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Growth Artist | Multi-Disciplinary Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        scroll-behavior: smooth;
+      :root {
+        --zinc-50: #fafafa; --zinc-100: #f4f4f5; --zinc-200: #e4e4e7; --zinc-300: #d4d4d8;
+        --zinc-400: #a1a1aa; --zinc-500: #71717a; --zinc-600: #52525b; --zinc-700: #3f3f46;
+        --zinc-800: #27272a; --zinc-900: #18181b; --zinc-950: #09090b;
+        --blue-400: #60a5fa; --blue-500: #3b82f6; --blue-600: #2563eb; --blue-700: #1d4ed8;
+        --indigo-50: #eef2ff; --indigo-100: #e0e7ff; --indigo-500: #6366f1; --indigo-600: #4f46e5; --indigo-700: #4338ca;
       }
-      .font-mono { font-family: 'JetBrains+Mono', monospace; }
+      
+      body {
+        margin: 0;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        scroll-behavior: smooth;
+        line-height: 1.5;
+      }
+
+      .font-mono { font-family: 'JetBrains Mono', monospace; }
       .font-serif { font-family: 'Playfair Display', serif; }
       
-      /* Mode Transitions */
       .mode-transition {
-        transition: background-color 0.5s ease, color 0.5s ease;
+        transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
       }
+
+      /* Core Utility Mappings */
+      .max-w-7xl { max-width: 80rem; margin-left: auto; margin-right: auto; }
+      .flex { display: flex; }
+      .grid { display: grid; }
+      .hidden { display: none; }
+      .relative { position: relative; }
+      .absolute { position: absolute; }
+      .fixed { position: fixed; }
+      .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+      .z-50 { z-index: 50; }
+      
+      .items-center { align-items: center; }
+      .justify-between { justify-content: space-between; }
+      .justify-center { justify-content: center; }
+      .flex-col { flex-direction: column; }
+      
+      /* Layout & Spacing */
+      .p-4 { padding: 1rem; }
+      .p-6 { padding: 1.5rem; }
+      .p-8 { padding: 2rem; }
+      .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+      .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+      .pt-48 { padding-top: 12rem; }
+      .pb-32 { padding-bottom: 8rem; }
+      
+      /* Typography */
+      .text-xl { font-size: 1.25rem; }
+      .text-2xl { font-size: 1.5rem; }
+      .text-3xl { font-size: 1.875rem; }
+      .text-4xl { font-size: 2.25rem; }
+      .text-5xl { font-size: 3rem; }
+      .text-6xl { font-size: 3.75rem; }
+      .font-bold { font-weight: 700; }
+      .font-black { font-weight: 900; }
+      .uppercase { text-transform: uppercase; }
+      .tracking-tight { letter-spacing: -0.025em; }
+      .leading-tight { line-height: 1.25; }
+      
+      /* Responsive overrides */
+      @media (min-width: 768px) {
+        .md\:flex { display: flex; }
+        .md\:grid { display: grid; }
+        .md\:text-left { text-align: left; }
+        .md\:text-8xl { font-size: 6rem; }
+        .md\:flex-row { flex-direction: row; }
+        .md\:w-96 { width: 24rem; }
+      }
+
+      /* Transitions */
+      .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+      .duration-300 { transition-duration: 300ms; }
+      
+      @keyframes bounce {
+        0%, 100% { transform: translate(-50%, -25%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
+        50% { transform: translate(-50%, 0); animation-timing-function: cubic-bezier(0,0,0.2,1); }
+      }
+      .animate-bounce { animation: bounce 1s infinite; }
     </style>
 <script type="importmap">
 {
